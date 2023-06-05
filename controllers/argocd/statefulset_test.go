@@ -311,6 +311,20 @@ func TestReconcileArgoCD_reconcileApplicationController_withSharding(t *testing.
 			},
 			replicas: 1,
 			vars: []corev1.EnvVar{
+				{Name: "ARGOCD_HARD_RECONCILIATION_TIMEOUT", ValueFrom: &corev1.EnvVarSource{
+					ConfigMapKeyRef: &corev1.ConfigMapKeySelector{
+						LocalObjectReference: corev1.LocalObjectReference{Name: "argocd-cm"},
+						Key:                  "timeout.hard.reconciliation",
+						Optional:             boolPtr(true),
+					},
+				}},
+				{Name: "ARGOCD_RECONCILIATION_TIMEOUT", ValueFrom: &corev1.EnvVarSource{
+					ConfigMapKeyRef: &corev1.ConfigMapKeySelector{
+						LocalObjectReference: corev1.LocalObjectReference{Name: "argocd-cm"},
+						Key:                  "timeout.reconciliation",
+						Optional:             boolPtr(true),
+					},
+				}},
 				{Name: "HOME", Value: "/home/argocd"},
 			},
 		},
@@ -322,6 +336,20 @@ func TestReconcileArgoCD_reconcileApplicationController_withSharding(t *testing.
 			replicas: 1,
 			vars: []corev1.EnvVar{
 				{Name: "ARGOCD_CONTROLLER_REPLICAS", Value: "1"},
+				{Name: "ARGOCD_HARD_RECONCILIATION_TIMEOUT", ValueFrom: &corev1.EnvVarSource{
+					ConfigMapKeyRef: &corev1.ConfigMapKeySelector{
+						LocalObjectReference: corev1.LocalObjectReference{Name: "argocd-cm"},
+						Key:                  "timeout.hard.reconciliation",
+						Optional:             boolPtr(true),
+					},
+				}},
+				{Name: "ARGOCD_RECONCILIATION_TIMEOUT", ValueFrom: &corev1.EnvVarSource{
+					ConfigMapKeyRef: &corev1.ConfigMapKeySelector{
+						LocalObjectReference: corev1.LocalObjectReference{Name: "argocd-cm"},
+						Key:                  "timeout.reconciliation",
+						Optional:             boolPtr(true),
+					},
+				}},
 				{Name: "HOME", Value: "/home/argocd"},
 			},
 		},
@@ -333,6 +361,20 @@ func TestReconcileArgoCD_reconcileApplicationController_withSharding(t *testing.
 			replicas: 3,
 			vars: []corev1.EnvVar{
 				{Name: "ARGOCD_CONTROLLER_REPLICAS", Value: "3"},
+				{Name: "ARGOCD_HARD_RECONCILIATION_TIMEOUT", ValueFrom: &corev1.EnvVarSource{
+					ConfigMapKeyRef: &corev1.ConfigMapKeySelector{
+						LocalObjectReference: corev1.LocalObjectReference{Name: "argocd-cm"},
+						Key:                  "timeout.hard.reconciliation",
+						Optional:             boolPtr(true),
+					},
+				}},
+				{Name: "ARGOCD_RECONCILIATION_TIMEOUT", ValueFrom: &corev1.EnvVarSource{
+					ConfigMapKeyRef: &corev1.ConfigMapKeySelector{
+						LocalObjectReference: corev1.LocalObjectReference{Name: "argocd-cm"},
+						Key:                  "timeout.reconciliation",
+						Optional:             boolPtr(true),
+					},
+				}},
 				{Name: "HOME", Value: "/home/argocd"},
 			},
 		},

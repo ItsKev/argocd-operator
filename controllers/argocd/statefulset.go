@@ -448,6 +448,28 @@ func getArgoControllerContainerEnv(cr *argoprojv1a1.ArgoCD) []corev1.EnvVar {
 		})
 	}
 
+	env = append(env, corev1.EnvVar{
+		Name: "ARGOCD_RECONCILIATION_TIMEOUT",
+		ValueFrom: &corev1.EnvVarSource{
+			ConfigMapKeyRef: &corev1.ConfigMapKeySelector{
+				LocalObjectReference: corev1.LocalObjectReference{Name: "argocd-cm"},
+				Key:                  "timeout.reconciliation",
+				Optional:             boolPtr(true),
+			},
+		},
+	})
+
+	env = append(env, corev1.EnvVar{
+		Name: "ARGOCD_HARD_RECONCILIATION_TIMEOUT",
+		ValueFrom: &corev1.EnvVarSource{
+			ConfigMapKeyRef: &corev1.ConfigMapKeySelector{
+				LocalObjectReference: corev1.LocalObjectReference{Name: "argocd-cm"},
+				Key:                  "timeout.hard.reconciliation",
+				Optional:             boolPtr(true),
+			},
+		},
+	})
+
 	return env
 }
 
